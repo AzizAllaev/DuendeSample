@@ -4,7 +4,10 @@
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello, World!");
+			var client = new HttpClient();
+
+
+			var disc = await client.GetDiscove1ryDocumentAsync();
 		}
 	}
 }
