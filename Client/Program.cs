@@ -7,7 +7,7 @@
 			var client = new HttpClient();
 
 
-			var disc = await client.GetDiscove1ryDocumentAsync();
+			//var disc = await client.GetDiscove1ryDocumentAsync();
 		}
 	}
 }
