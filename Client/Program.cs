@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityModel.Client;
+using System.Text.Json;
 
 namespace Client
 {
@@ -8,7 +9,7 @@ namespace Client
 		{
 			var client = new HttpClient();
 
-			var disco = await client.GetDiscoveryDocumentAsync();
+			var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
 
 			if (disco.IsError)
 			{
@@ -22,7 +23,7 @@ namespace Client
 				ClientSecret = "secret",
 				Scope = "api1"
 			});
-			if(tokenResponse.IsError)
+			if (tokenResponse.IsError)
 			{
 				Console.WriteLine(tokenResponse.Error);
 				Console.WriteLine(tokenResponse.ErrorDescription);
@@ -33,11 +34,16 @@ namespace Client
 			var apiClient = new HttpClient();
 			apiClient.SetBearerToken(tokenResponse.AccessToken!);
 
-			var response = await apiClient.GetAsync("https://localhost:5001");
+			var response = await apiClient.GetAsync("https://localhost:6001/identity");
 
 			if (!response.IsSuccessStatusCode)
 			{
-
+				Console.WriteLine(response.StatusCode);
+			}
+			else
+			{
+				var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+				Console.WriteLine(JsonSerializer.Serialize(doc, new JsonSerializerOptions { WriteIndented = true }));
 			}
 		}
 	}

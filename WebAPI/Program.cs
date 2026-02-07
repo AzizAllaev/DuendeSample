@@ -17,7 +17,7 @@ namespace WebAPI
 
 			builder.Services.AddAuthentication().AddJwtBearer(options =>
 			{
-				options.Authority = "https://localhost:7093";
+				options.Authority = "https://localhost:5001";
 				options.TokenValidationParameters.ValidateAudience = false;
 			});
 
