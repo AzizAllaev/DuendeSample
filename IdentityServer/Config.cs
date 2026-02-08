@@ -1,3 +1,4 @@
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
 namespace IdentityServer
@@ -7,7 +8,8 @@ namespace IdentityServer
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -28,6 +30,21 @@ namespace IdentityServer
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes = { "api1" }
+                },
+                new Client
+                {
+                    ClientId = "client",
+                    ClientSecrets = { new Secret("secret".Sha256())},
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = { "https://localhost:5002/signin-oidc"},
+                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc"},
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
             };
     }

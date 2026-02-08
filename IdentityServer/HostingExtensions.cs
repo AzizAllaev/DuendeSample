@@ -49,6 +49,7 @@ namespace IdentityServer
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
+                .AddTestUsers(TestUsers.Users)
                 .AddLicenseSummary();
 
             return builder.Build();
