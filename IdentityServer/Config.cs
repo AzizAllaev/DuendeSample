@@ -33,7 +33,7 @@ namespace IdentityServer
                 },
                 new Client
                 {
-                    ClientId = "client",
+                    ClientId = "web",
                     ClientSecrets = { new Secret("secret".Sha256())},
 
                     AllowedGrantTypes = GrantTypes.Code,
