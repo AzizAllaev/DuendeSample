@@ -12,30 +12,7 @@ namespace WebAPI
 			// Add services to the container.
 
 			builder.Services.AddRazorPages();
-			builder.Services.AddAuthentication(options =>
-			{
-				options.DefaultScheme = "Cookies";
-				options.DefaultChallengeScheme = "oidc";
-			})
-				.AddCookie("Cookies")
-				.AddOpenIdConnect("oidc", options =>
-				{
-					options.Authority = "https://localhost5001";
-
-					options.ClientId = "web";
-					options.ClientSecret = "secret";
-					options.ResponseType = "code";
-
-					options.Scope.Clear();
-					options.Scope.Add("openid");
-					options.Scope.Add("profile");
-
-					options.MapInboundClaims = false;
-					options.DisableTelemetry = true;
-
-					options.SaveTokens = true;
-				});
-
+			
 			builder.Services.AddControllers();
 			// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 			builder.Services.AddOpenApi();
