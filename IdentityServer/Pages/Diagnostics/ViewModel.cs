@@ -16,8 +16,9 @@ public class ViewModel
         {
             if (encoded != null)
             {
-                var bytes = Base64Url.DecodeFromUtf8(encoded);
-                var value = Encoding.UTF8.GetString(bytes);
+				var inputBytes = Encoding.UTF8.GetBytes(encoded);
+				var bytes = Base64Url.DecodeFromUtf8(inputBytes);
+				var value = Encoding.UTF8.GetString(bytes);
                 Clients = JsonSerializer.Deserialize<string[]>(value) ?? Enumerable.Empty<string>();
                 return;
             }

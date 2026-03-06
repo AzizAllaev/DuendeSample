@@ -16,7 +16,7 @@ namespace WebApp
 				.AddCookie("Cookies")
 				.AddOpenIdConnect("oidc", options =>
 				{
-					options.Authority = "https://localhost5001";
+					options.Authority = "https://localhost:5001";
 
 					options.ClientId = "web";
 					options.ClientSecret = "secret";
